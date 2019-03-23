@@ -1,9 +1,12 @@
 package handler
 
 import (
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
+	"net/url"
+	"strings"
 
 	"github.com/leafduo/grpc-dev-proxy/client"
 )
@@ -20,9 +23,10 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(500)
 			return
 		}
-		output, err := client.Invoke(target, service, method, string(body))
+		output, err := client.Invoke(target, service, method, convertQueryToMetadata(r.URL.Query()), string(body))
 		if err != nil {
 			w.WriteHeader(500)
+			io.WriteString(w, err.Error())
 			return
 		}
 		io.WriteString(w, output)
@@ -33,4 +37,13 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	} else {
 		// TODO: print some help message?
 	}
+}
+
+func convertQueryToMetadata(query url.Values) []string {
+	metadata := make([]string, 0, len(query))
+	for key, value := range query {
+		m := fmt.Sprintf("%s: %s", key, strings.Join(value, ","))
+		metadata = append(metadata, m)
+	}
+	return metadata
 }

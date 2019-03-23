@@ -15,7 +15,7 @@ import (
 	reflectpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
 )
 
-func Invoke(target string, service string, method string, message string) (string, error) {
+func Invoke(target string, service string, method string, headers []string, message string) (string, error) {
 	ctx := context.Background()
 	network := "tcp"
 	var creds credentials.TransportCredentials
@@ -39,7 +39,7 @@ func Invoke(target string, service string, method string, message string) (strin
 	h := grpcurl.NewDefaultEventHandler(output, descSource, formatter, true)
 
 	symbol := fmt.Sprintf("%s/%s", service, method)
-	err = grpcurl.InvokeRPC(ctx, descSource, cc, symbol, nil, h, rf.Next)
+	err = grpcurl.InvokeRPC(ctx, descSource, cc, symbol, headers, h, rf.Next)
 	if err != nil {
 		logrus.WithError(err).Errorf("Error invoking method %q", symbol)
 	}
