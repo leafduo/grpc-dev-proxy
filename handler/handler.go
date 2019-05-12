@@ -7,10 +7,9 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/leafduo/grpc-dev-proxy/client"
 )
 
+//HandleRequest handles incoming requests
 func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	target := r.Header.Get("target")
 	service := r.Header.Get("service")
@@ -20,16 +19,16 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 		// TODO: describe method if it's GET request
 		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
-			w.WriteHeader(500)
+			w.WriteHeader(501)
 			return
 		}
-		output, err := client.Invoke(target, service, method, convertQueryToMetadata(r.URL.Query()), string(body))
+		output, err := invoke(target, service, method, convertQueryToMetadata(r.URL.Query()), string(body))
 		if err != nil {
 			w.WriteHeader(500)
-			io.WriteString(w, err.Error())
+			_, _ = io.WriteString(w, err.Error())
 			return
 		}
-		io.WriteString(w, output)
+		_, _ = io.WriteString(w, output)
 	} else if len(service) > 0 {
 		// TODO: list methods
 	} else if len(target) > 0 {

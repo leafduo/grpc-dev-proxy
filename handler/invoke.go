@@ -1,4 +1,4 @@
-package client
+package handler
 
 import (
 	"bytes"
@@ -15,7 +15,7 @@ import (
 	reflectpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
 )
 
-func Invoke(target string, service string, method string, headers []string, message string) (string, error) {
+func invoke(target string, service string, method string, headers []string, message string) (string, error) {
 	ctx := context.Background()
 	network := "tcp"
 	var creds credentials.TransportCredentials
@@ -29,10 +29,8 @@ func Invoke(target string, service string, method string, headers []string, mess
 
 	format := "json"
 	in := strings.NewReader(message)
-	includeSeparators := true
-	emitDefaults := true
 	output := &bytes.Buffer{}
-	rf, formatter, err := grpcurl.RequestParserAndFormatterFor(grpcurl.Format(format), descSource, emitDefaults, includeSeparators, in)
+	rf, formatter, err := grpcurl.RequestParserAndFormatterFor(grpcurl.Format(format), descSource, true, true, in)
 	if err != nil {
 		logrus.WithError(err).Errorf("Failed to construct request parser and formatter for %s", format)
 	}

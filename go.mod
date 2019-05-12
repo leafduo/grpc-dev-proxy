@@ -6,6 +6,7 @@ require (
 	github.com/fullstorydev/grpcurl v1.2.1
 	github.com/gin-contrib/sse v0.0.0-20190301062529-5545eab6dad3 // indirect
 	github.com/gin-gonic/gin v1.3.0
+	github.com/golang/protobuf v1.2.0
 	github.com/jhump/protoreflect v1.2.0
 	github.com/mattn/go-isatty v0.0.6 // indirect
 	github.com/sirupsen/logrus v1.3.0

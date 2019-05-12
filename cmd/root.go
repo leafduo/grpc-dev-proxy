@@ -11,17 +11,26 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "hugo",
-	Short: "Hugo is a very fast static site generator",
-	Long: `A Fast and Flexible Static Site Generator built with
-				  love by spf13 and friends in Go.
-				  Complete documentation is available at http://hugo.spf13.com`,
+	Use:   "grpc-dev-proxy",
+	Short: "grpc-dev-proxy is a proxy for debugging gRPC service more easily",
 	Run: func(cmd *cobra.Command, args []string) {
 		mux := http.NewServeMux()
 		mux.HandleFunc("/", handler.HandleRequest)
 
-		http.ListenAndServe("127.0.0.1:2333", mux)
+		addr := fmt.Sprintf("127.0.0.1:%d", port)
+		fmt.Printf("Listening on: %s\n", addr)
+		err := http.ListenAndServe(addr, mux)
+		if err != nil {
+			panic(err)
+		}
+
 	},
+}
+
+var port int
+
+func init() {
+	rootCmd.PersistentFlags().IntVar(&port, "port", 2333, "listening port")
 }
 
 func Execute() {
