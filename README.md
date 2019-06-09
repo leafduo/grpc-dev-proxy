@@ -1,5 +1,5 @@
 #  grpc-dev-proxy
-grpc-dev-proxy is a proxy that allows debugging gRPC services using HTTP GUI tools like [Postman](https://www.getpostman.com/) or [Paw](https://paw.cloud/) .
+grpc-dev-proxy is a proxy that allows debugging gRPC services using HTTP GUI tools like [Postman](https://www.getpostman.com/) or [Paw](https://paw.cloud/).
 
 ## Feature
 - Supports gRPC [server reflection](https://github.com/grpc/grpc/blob/master/doc/server-reflection.md)
