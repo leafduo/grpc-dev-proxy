@@ -75,3 +75,7 @@ curl -X "POST" "http://localhost:2333/?user-id=1" \
 ```
 
 ### Paw
+
+![headers](https://raw.githubusercontent.com/leafduo/grpc-dev-proxy/assets/Paw%202019-06-09%20at%2018.55.56%402x.png)
+![body](https://raw.githubusercontent.com/leafduo/grpc-dev-proxy/assets/Paw%202019-06-09%20at%2018.56.07%402x.png)
+![metadata](https://raw.githubusercontent.com/leafduo/grpc-dev-proxy/assets/Paw%202019-06-09%20at%2018.56.12%402x.png)
