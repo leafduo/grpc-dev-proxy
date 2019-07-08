@@ -7,32 +7,40 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/sirupsen/logrus"
 )
 
 //HandleRequest handles incoming requests
 func HandleRequest(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		w.WriteHeader(400)
+		_, _ = io.WriteString(w, "Only POST method is supported")
+	}
+
 	target := r.Header.Get("target")
 	service := r.Header.Get("service")
 	method := r.Header.Get("method")
 	// TODO: more validation
 	if len(method) > 0 {
-		// TODO: describe method if it's GET request
 		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
 			w.WriteHeader(501)
 			return
 		}
-		output, err := invoke(target, service, method, convertQueryToMetadata(r.URL.Query()), string(body))
+		err = invoke(w, target, service, method, convertQueryToMetadata(r.URL.Query()), string(body))
 		if err != nil {
-			w.WriteHeader(500)
-			_, _ = io.WriteString(w, err.Error())
+			logrus.WithError(err).Error("failed to invoke method")
 			return
 		}
-		_, _ = io.WriteString(w, output)
 	} else if len(service) > 0 {
 		// TODO: list methods
 	} else if len(target) > 0 {
-		// TODO: list services
+		err := listServices(w, target)
+		if err != nil {
+			logrus.WithError(err).Error("failed to list services")
+			return
+		}
 	} else {
 		// TODO: print some help message?
 	}
