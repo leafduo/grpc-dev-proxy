@@ -58,5 +58,7 @@ func invoke(w http.ResponseWriter, target string, service string, method string,
 		}
 	}
 
+	_, _ = w.Write(output.Bytes())
+
 	return nil
 }
