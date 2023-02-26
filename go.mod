@@ -18,9 +18,9 @@ require (
 	github.com/kardianos/osext v0.0.0-20170510131534-ae77be60afb1 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.1 // indirect
 	github.com/spf13/pflag v1.0.3 // indirect
-	golang.org/x/crypto v0.0.0-20180904163835-0709b304e793 // indirect
-	golang.org/x/net v0.0.0-20180826012351-8a410e7b638d // indirect
-	golang.org/x/sys v0.0.0-20190222072716-a9d3bda3a223 // indirect
-	golang.org/x/text v0.3.0 // indirect
+	golang.org/x/crypto v0.6.0 // indirect
+	golang.org/x/net v0.6.0 // indirect
+	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/text v0.7.0 // indirect
 	google.golang.org/genproto v0.0.0-20180817151627-c66870c02cf8 // indirect
 )
