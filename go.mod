@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/fullstorydev/grpcurl v1.8.7
 	github.com/google/gops v0.3.6
-	github.com/jhump/protoreflect v1.14.1
+	github.com/jhump/protoreflect v1.15.1
 	github.com/sirupsen/logrus v1.3.0
 	github.com/spf13/cobra v0.0.3
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
@@ -13,6 +13,7 @@ require (
 )
 
 require (
+	github.com/bufbuild/protocompile v0.4.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/kardianos/osext v0.0.0-20170510131534-ae77be60afb1 // indirect
@@ -20,9 +21,10 @@ require (
 	github.com/spf13/pflag v1.0.3 // indirect
 	golang.org/x/crypto v0.6.0 // indirect
 	golang.org/x/net v0.8.0 // indirect
+	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
 	golang.org/x/sys v0.6.0 // indirect
 	golang.org/x/term v0.6.0 // indirect
 	golang.org/x/text v0.8.0 // indirect
 	google.golang.org/genproto v0.0.0-20230110181048-76db0878b65f // indirect
-	google.golang.org/protobuf v1.28.1 // indirect
+	google.golang.org/protobuf v1.28.2-0.20230222093303-bc1253ad3743 // indirect
 )
